@@ -1,0 +1,116 @@
+[build-system]
+requires = ["setuptools>=77.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentbox"
+version = "0.0.0"
+description = "A distributed container orchestrator for AI agents"
+readme = "README.md"
+authors = [
+    { name = "AgentBox contributors" }
+]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "torchmonarch>=0.7.0",
+    "cloudpickle>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff-api==0.2.1",
+    "stdlibs==2025.10.28",
+    "ufmt==2.9.1",
+    "usort==1.1.0",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-timeout>=2.0.0",
+    "ruff>=0.15,<0.16",
+    "mypy>=1.0.0",
+    "psutil>=5.9.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+# E203 is intentionally omitted because it conflicts with Black/ufmt slice
+# formatting.
+extend-select = [
+    "E101",    # mixed spaces and tabs in indentation
+    "E501",    # lines longer than the project hard limit
+    "W191",    # tabs in indentation
+    "W292",    # newline at end of file
+    "B",       # flake8-bugbear: likely bugs (no-from re-raise, loop-var closures, ...)
+    "RET",     # flake8-return: simpler return/branch flow
+    "PIE",     # flake8-pie: misc lints (unnecessary pass, ...)
+    "C4",      # flake8-comprehensions: clearer comprehensions
+    "TRY400",  # use logging.exception (keeps traceback) over logging.error in handlers
+]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 119
+
+[tool.ruff.format]
+indent-style = "space"
+
+# ufmt reads line length and target version from [tool.black] even when
+# formatting with ruff-api; [tool.ruff.format] does not affect `ufmt format`.
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.ufmt]
+formatter = "ruff-api"
+sorter = "usort"
+
+[tool.usort]
+first_party_detection = false
+
+[tool.mypy]
+python_version = "3.12"
+# Keep the src-layout package visible and follow it when checking callers such
+# as examples.  Skipping imports turns the public AgentBox API into Any and
+# lets invalid calls pass type checking.
+mypy_path = "src"
+namespace_packages = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_calls = false
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+strict_optional = true
+strict_equality = true
+explicit_package_bases = true
+follow_imports = "normal"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+markers = [
+    "integration: exercises behavior across a real local Monarch worker",
+]
+# Only collect the unit-test suite by default.  examples/ contains
+# executable scripts (with test_*-named functions and __main__ entrypoints)
+# that are run explicitly, not as part of `pytest`.
+testpaths = ["tests"]
+# Fail a hung test instead of stalling the whole run.
+timeout = 120

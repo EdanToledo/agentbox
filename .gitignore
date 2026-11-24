@@ -1,0 +1,18 @@
+# Build artifacts
+*.egg-info/
+dist/
+build/
+__pycache__/
+*.pyc
+
+# Test artifacts (CI emits junit.xml; don't commit it)
+junit.xml
+
+# Slurm logs
+*.out
+*.err
+
+# Monarch job-state cache
+.monarch/
+.venv/
+

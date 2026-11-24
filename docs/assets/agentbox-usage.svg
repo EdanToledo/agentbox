@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1500"
+   height="950"
+   viewBox="0 0 1500 950"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   id="svg41"
+   sodipodi:docname="agentbox-usage.svg"
+   inkscape:version="1.4 (e7c3feb1, 2024-10-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview41"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.80367297"
+     inkscape:cx="675.64796"
+     inkscape:cy="513.89062"
+     inkscape:window-width="1728"
+     inkscape:window-height="941"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg41" />
+  <title
+     id="title">AgentBox client, manager, and direct execution flow</title>
+  <desc
+     id="desc">A client application uses AgentBoxManager to acquire a worker and receives a client-side Machine handle backed by a Monarch ProcMesh. AgentBoxManager controls a worker pool through ResourceManager. The Machine handle connects directly to the selected Monarch worker. The worker executes commands on the host or, through a client-side Container handle, in an optional Apptainer instance.</desc>
+  <defs
+     id="defs2">
+    <marker
+       id="black-arrow"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         fill="#27272a"
+         id="path1" />
+    </marker>
+    <marker
+       id="blue-arrow"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto">
+      <path
+         d="M 0 0 L 10 5 L 0 10 z"
+         fill="#1976d2"
+         id="path2" />
+    </marker>
+    <style
+       id="style2">
+      .hand { font-family: &quot;Comic Sans MS&quot;, &quot;Bradley Hand&quot;, &quot;Segoe Print&quot;, cursive; fill: #27272a; }
+      .label { font-size: 23px; font-weight: 600; text-anchor: middle; }
+      .small { font-size: 16px; text-anchor: middle; fill: #52525b; }
+      .edge { font-size: 18px; font-weight: 600; }
+      .box { fill: #eef0f3; stroke: #27272a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .manager-box, .machine-box, .container-box { fill: #eef0f3; }
+      .container-label { fill: #27272a; }
+      .container-small { fill: #52525b; }
+      .control { fill: none; stroke: #27272a; stroke-width: 3.2; stroke-linecap: round; marker-end: url(#black-arrow); }
+      .direct { fill: none; stroke: #1976d2; stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: 3 8; marker-end: url(#blue-arrow); }
+    </style>
+  </defs>
+  <rect
+     width="1500"
+     height="950"
+     fill="#ffffff"
+     id="rect2" />
+  <!-- Client -->
+  <path
+     d="M 82 132 C 84 77, 124 39, 178 41 C 232 43, 270 86, 267 139 C 264 193, 223 229, 168 226 C 116 224, 80 184, 82 132 Z"
+     fill="#9dcdf3"
+     stroke="#27272a"
+     stroke-width="3.2"
+     id="path3" />
+  <text
+     class="hand label"
+     x="174"
+     y="126"
+     id="text3">Client</text>
+  <text
+     class="hand small"
+     x="174"
+     y="153"
+     id="text4">application</text>
+  <text
+     class="hand small"
+     x="174"
+     y="181"
+     id="client-machine-handle">Machine handle</text>
+  <!-- Manager / controller -->
+  <path
+     class="box manager-box"
+     d="M 590 48 Q 578 50 577 67 L 576 175 Q 578 190 594 191 L 879 192 Q 895 190 896 174 L 895 67 Q 894 50 878 50 Z"
+     id="path4" />
+  <text
+     class="hand label"
+     x="736"
+     y="94"
+     id="text5">AgentBoxManager</text>
+  <text
+     class="hand label"
+     x="736"
+     y="122"
+     id="text6">ResourceManager</text>
+  <text
+     class="hand small"
+     x="736"
+     y="151"
+     id="text7">control plane · worker pool</text>
+  <text
+     class="hand small"
+     x="736"
+     y="174"
+     id="text8">local · Slurm</text>
+  <!-- Client first contacts manager -->
+  <path
+     class="control"
+     d="M 263 91 C 364 61, 466 60, 577 88"
+     id="path8" />
+  <text
+     class="hand edge"
+     x="412"
+     y="46"
+     text-anchor="middle"
+     id="text9">1. acquire / release</text>
+  <!-- Machines in the managed pool -->
+  <path
+     class="box machine-box"
+     d="M 347 298 Q 350 281 367 280 L 631 282 Q 647 283 648 300 L 649 419 Q 646 435 630 436 L 366 434 Q 349 432 348 417 Z"
+     id="path9" />
+  <text
+     class="hand label"
+     x="498"
+     y="334"
+     id="text10">Monarch worker</text>
+  <text
+     class="hand label"
+     x="498"
+     y="364"
+     id="text11">remote process</text>
+  <text
+     class="hand small"
+     x="498"
+     y="395"
+     id="text12">CPU or GPU pool slot</text>
+  <path
+     class="box machine-box"
+     d="M 972 300 Q 974 283 991 282 L 1255 283 Q 1272 285 1273 302 L 1272 419 Q 1270 435 1253 436 L 990 434 Q 974 432 973 417 Z"
+     id="path12" />
+  <text
+     class="hand label"
+     x="1122"
+     y="335"
+     id="text13">Monarch worker</text>
+  <text
+     class="hand label"
+     x="1122"
+     y="365"
+     id="text14">remote process</text>
+  <text
+     class="hand small"
+     x="1122"
+     y="396"
+     id="text15">another pool slot</text>
+  <!-- Manager controls worker lifecycle, but not workload execution -->
+  <path
+     class="control"
+     d="M 662 191 C 621 231, 568 254, 518 281"
+     id="path15" />
+  <path
+     class="control"
+     d="M 812 192 C 889 228, 1000 253, 1078 282"
+     id="path16" />
+  <text
+     class="hand edge"
+     x="805.45862"
+     y="321.90152"
+     text-anchor="middle"
+     id="text16">2. allocate and manage pool</text>
+  <!-- Direct connection from the client-side Machine handle to its worker -->
+  <path
+     class="direct"
+     d="M 255 187 C 290 226, 319 261, 349 292"
+     id="path17" />
+  <text
+     class="hand edge"
+     x="231.54135"
+     y="252.46573"
+     fill="#1976d2"
+     text-anchor="middle"
+     id="text17">3. direct RPC</text>
+  <text
+     class="hand edge"
+     x="231.54135"
+     y="277.46573"
+     fill="#1976d2"
+     text-anchor="middle"
+     id="text18">via Machine handle</text>
+  <!-- A lighter direct path shows that any acquired pool machine is addressable -->
+  <path
+     class="direct"
+     d="M 264 167 C 477 209, 752 251, 974 320"
+     id="path18" />
+  <!-- Optional container beneath active machine -->
+  <path
+     class="box container-box"
+     d="M 368 540 Q 369 523 387 521 L 637 522 Q 654 524 655 541 L 654 660 Q 652 678 635 679 L 386 677 Q 369 675 368 658 Z"
+     id="path19" />
+  <text
+     class="hand label container-label"
+     x="512"
+     y="575"
+     id="text19">Apptainer instance</text>
+  <text
+     class="hand small container-small"
+     x="512"
+     y="606"
+     id="text20">via client-side Container</text>
+  <text
+     class="hand small container-small"
+     x="512"
+     y="638"
+     id="text21">optional isolation</text>
+  <!-- Direct host shell path -->
+  <path
+     class="box machine-box"
+     d="M 690 540 Q 692 523 708 522 L 927 523 Q 944 525 944 542 L 943 659 Q 941 676 925 677 L 707 676 Q 691 674 690 657 Z"
+     id="path21" />
+  <text
+     class="hand label"
+     x="817"
+     y="586"
+     id="text22">Host shell</text>
+  <text
+     class="hand small"
+     x="817"
+     y="618"
+     id="text23">machine.run</text>
+  <text
+     class="hand small"
+     x="817"
+     y="643"
+     id="text24">no container required</text>
+  <!-- The worker executes directly on the host or invokes Apptainer -->
+  <path
+     class="direct"
+     d="M 469 435 C 459 466, 458 491, 472 522"
+     id="path24" />
+  <text
+     class="hand edge"
+     x="445.9086"
+     y="477.80142"
+     fill="#1976d2"
+     text-anchor="end"
+     id="text25">4a. apptainer exec</text>
+  <path
+     class="direct"
+     d="M 552 435 C 624 476, 704 491, 760 522"
+     id="path25" />
+  <text
+     class="hand edge"
+     x="723.61859"
+     y="464.04572"
+     fill="#1976d2"
+     text-anchor="middle"
+     id="text26">4b. execute on host</text>
+  <!-- Shells / sessions -->
+  <path
+     class="box container-box"
+     d="M 120 775 Q 122 759 138 758 L 347 760 Q 364 761 365 778 L 364 885 Q 362 900 346 901 L 137 899 Q 121 897 120 882 Z"
+     id="path26" />
+  <text
+     class="hand label container-label"
+     x="242"
+     y="818"
+     id="text27">Shell / processes</text>
+  <text
+     class="hand small container-small"
+     x="242"
+     y="850"
+     id="text28">commands · PTYs</text>
+  <text
+     class="hand small container-small"
+     x="242"
+     y="875"
+     id="text29">files · processes</text>
+  <path
+     class="box container-box"
+     d="M 458 776 Q 460 759 477 758 L 686 759 Q 702 761 703 778 L 702 884 Q 700 900 684 901 L 476 899 Q 459 897 458 881 Z"
+     id="path29" />
+  <text
+     class="hand label container-label"
+     x="580"
+     y="817"
+     id="text30">Services</text>
+  <text
+     class="hand small container-small"
+     x="580"
+     y="849"
+     id="text31">long-running processes</text>
+  <text
+     class="hand small container-small"
+     x="580"
+     y="874"
+     id="text32">container workloads</text>
+  <path
+     class="box machine-box"
+     d="M 810 777 Q 812 760 829 759 L 1037 760 Q 1054 762 1055 779 L 1054 884 Q 1052 900 1035 901 L 828 899 Q 811 897 810 881 Z"
+     id="path32" />
+  <text
+     class="hand label"
+     x="932"
+     y="820"
+     id="text33">Shell / processes</text>
+  <text
+     class="hand small"
+     x="932"
+     y="853"
+     id="text34">host workloads</text>
+  <!-- Container and host shell fan-out -->
+  <path
+     class="direct"
+     d="M 466 679 C 414 724, 349 744, 293 759"
+     id="path34" />
+  <path
+     class="direct"
+     d="M 558 679 C 568 707, 574 731, 578 758"
+     id="path35" />
+  <path
+     class="direct"
+     d="M 850 677 C 874 709, 900 735, 918 759"
+     id="path36" />
+  <text
+     class="hand edge"
+     x="318.29706"
+     y="716.55713"
+     fill="#1976d2"
+     text-anchor="middle"
+     id="text36">5. open session</text>
+  <!-- Connection type legend -->
+  <path
+     d="M 1080 548 Q 1082 532 1099 531 L 1431 533 Q 1447 535 1448 551 L 1447 785 Q 1445 801 1429 802 L 1098 800 Q 1081 798 1080 782 Z"
+     fill="#fff7e6"
+     stroke="#b89b6a"
+     stroke-width="3"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="legend-box" />
+  <text
+     class="hand edge"
+     x="1264"
+     y="590"
+     text-anchor="middle"
+     id="legend-title">Connection Type</text>
+  <line
+     x1="1120"
+     y1="655"
+     x2="1190"
+     y2="655"
+     class="control"
+     id="line39" />
+  <text
+     class="hand"
+     x="1225"
+     y="661"
+     font-size="17"
+     id="text40">control / lifecycle</text>
+  <line
+     x1="1120"
+     y1="726"
+     x2="1190"
+     y2="726"
+     class="direct"
+     id="line40" />
+  <text
+     class="hand"
+     x="1225"
+     y="732"
+     font-size="17"
+     id="text41">direct execution path</text>
+</svg>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="1500"
+   height="820"
+   viewBox="0 0 1500 820"
+   role="img"
+   aria-labelledby="title desc"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg">
+  <title id="title">Tool call forwarded to Container</title>
+  <desc id="desc">A client hosts one Muse agent harness and an AgentBox Python client. AgentBoxManager allocates one Machine containing an Apptainer Container and a GPU. Muse remains outside the Machine and targets the nested Container API either through an in-band AgentBox shell path or through an out-of-band MCP tool forwarder. The Container starts shell and Python processes and connects to the GPU in its Machine.</desc>
+
+  <defs>
+    <marker id="black-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#27272a" />
+    </marker>
+    <marker id="blue-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1976d2" />
+    </marker>
+    <marker id="orange-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97735" />
+    </marker>
+    <marker id="gpu-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b8f68" />
+    </marker>
+    <style>
+      .hand { font-family: "Comic Sans MS", "Bradley Hand", "Segoe Print", cursive; fill: #27272a; }
+      .title { font-size: 30px; font-weight: 600; text-anchor: middle; }
+      .label { font-size: 23px; font-weight: 600; text-anchor: middle; }
+      .small { font-size: 16px; text-anchor: middle; fill: #52525b; }
+      .edge { font-size: 18px; font-weight: 600; }
+      .on-path { paint-order: stroke fill; stroke: #ffffff; stroke-width: 10px; stroke-linejoin: round; }
+      .box { fill: #eef0f3; stroke: #27272a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .control { fill: none; stroke: #27272a; stroke-width: 3.2; stroke-linecap: round; marker-end: url(#black-arrow); }
+      .in-band { fill: none; stroke: #1976d2; stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: 3 8; marker-end: url(#blue-arrow); }
+      .out-band { fill: none; stroke: #d97735; stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: 9 7; marker-end: url(#orange-arrow); }
+      .gpu { fill: none; stroke: #3b8f68; stroke-width: 3; stroke-linecap: round; marker-end: url(#gpu-arrow); }
+    </style>
+  </defs>
+
+  <rect width="1500" height="820" fill="#ffffff" />
+  <text class="hand title" x="750" y="46">Tool call forwarded to Container</text>
+
+  <!-- Client -->
+  <path d="M 61 116 Q 63 98 81 97 L 401 99 Q 419 100 420 118 L 419 548 Q 417 566 399 567 L 80 565 Q 62 563 61 545 Z" fill="#9dcdf3" stroke="#27272a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  <text class="hand label" x="240" y="145">Client</text>
+
+  <path d="M 93 190 Q 95 176 109 175 L 371 177 Q 385 178 386 192 L 385 255 Q 383 269 369 270 L 108 268 Q 94 266 93 252 Z" fill="#ffffff" stroke="#27272a" stroke-width="2.7" />
+  <text class="hand label" x="239" y="218" style="font-size:20px">AgentBox Python client</text>
+  <text class="hand small" x="239" y="248">lifecycle</text>
+
+  <path d="M 142 412 C 142 353, 180 315, 239 315 C 299 315, 339 354, 338 412 C 337 471, 298 510, 239 509 C 180 509, 142 470, 142 412 Z" fill="#f5cbb8" stroke="#27272a" stroke-width="3.2" />
+  <text class="hand label" x="240" y="400">Muse</text>
+  <text class="hand small" x="240" y="433">agent harness</text>
+  <text class="hand small" x="240" y="465">outside Machine</text>
+
+  <!-- Control plane -->
+  <path class="box" d="M 501 116 Q 503 98 521 97 L 791 99 Q 809 100 810 118 L 809 224 Q 807 242 789 243 L 520 241 Q 502 239 501 221 Z" />
+  <text class="hand label" x="655" y="153">AgentBoxManager</text>
+  <text class="hand small" x="655" y="188">control plane</text>
+  <path class="control" d="M 420 219 C 449 199, 474 180, 501 168" />
+  <text class="hand edge on-path" x="457" y="151" text-anchor="middle">lifecycle</text>
+
+  <!-- Machine is the outer worker boundary. -->
+  <path d="M 900 116 Q 902 98 920 97 L 1420 99 Q 1438 100 1439 118 L 1438 768 Q 1436 786 1418 787 L 919 785 Q 901 783 900 765 Z" fill="#9dcdf3" stroke="#27272a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  <text class="hand label" x="1169" y="142">Machine</text>
+  <text class="hand small" x="1169" y="173">Monarch worker</text>
+  <path class="control" d="M 810 174 C 844 174, 870 175, 900 178" />
+  <text class="hand edge on-path" x="855" y="151" text-anchor="middle">allocate</text>
+
+  <!-- Container is nested inside the Machine. -->
+  <path class="box" d="M 960 222 Q 962 204 980 203 L 1360 205 Q 1378 206 1379 224 L 1378 638 Q 1376 656 1358 657 L 979 655 Q 961 653 960 635 Z" />
+  <text class="hand label" x="1169" y="258">Container</text>
+  <text class="hand small" x="1169" y="288">Apptainer</text>
+
+  <!-- In-band shell targets the Container API, not the Machine. -->
+  <path class="in-band" d="M 420 391 C 610 365, 811 350, 1001 390" />
+  <text class="hand edge on-path" x="692" y="329" fill="#1976d2" text-anchor="middle">AgentBox shell · in-band</text>
+
+  <!-- MCP forwarder -->
+  <path d="M 501 502 Q 503 484 521 483 L 791 485 Q 809 486 810 504 L 809 647 Q 807 665 789 666 L 520 664 Q 502 662 501 644 Z" fill="#fff7e6" stroke="#b89b6a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" />
+  <text class="hand label" x="655" y="540">MCP tool forwarder</text>
+  <text class="hand small" x="655" y="581">run_command · read_file</text>
+  <text class="hand small" x="655" y="620">Container API calls</text>
+  <path class="out-band" d="M 420 454 C 459 469, 479 511, 501 540" />
+  <text class="hand edge on-path" x="457" y="493" fill="#d97735" text-anchor="middle">MCP</text>
+
+  <!-- Both paths terminate on the same Container API. -->
+  <path d="M 1001 360 Q 1003 346 1017 345 L 1321 347 Q 1335 348 1336 362 L 1335 438 Q 1333 452 1319 453 L 1016 451 Q 1002 449 1001 435 Z" fill="#fff7e6" stroke="#b89b6a" stroke-width="2.5" />
+  <text class="hand label" x="1169" y="388" style="font-size:19px">Container API</text>
+  <text class="hand small" x="1169" y="422">run · spawn · files</text>
+  <path class="out-band" d="M 810 574 C 876 565, 931 516, 1001 425" />
+  <text class="hand edge on-path" x="897" y="532" fill="#d97735" text-anchor="middle">out-of-band</text>
+
+  <path class="in-band" d="M 1169 453 C 1169 467, 1169 477, 1169 490" />
+  <path d="M 1021 507 Q 1023 493 1037 492 L 1301 494 Q 1315 495 1316 509 L 1315 574 Q 1313 588 1299 589 L 1036 587 Q 1022 585 1021 571 Z" fill="#e1f0fb" stroke="#1976d2" stroke-width="2.5" />
+  <text class="hand label" x="1169" y="535" style="font-size:19px">Shell / processes</text>
+  <text class="hand small" x="1169" y="566">inside Container</text>
+
+  <!-- GPU is a Machine resource exposed to the Container. -->
+  <path class="gpu" d="M 1169 657 C 1169 670, 1169 679, 1169 692" />
+  <path d="M 1079 710 Q 1081 692 1099 691 L 1239 693 Q 1257 694 1258 712 L 1257 749 Q 1255 767 1237 768 L 1098 766 Q 1080 764 1079 746 Z" fill="#bfe8d0" stroke="#3b8f68" stroke-width="3" />
+  <text class="hand label" x="1169" y="730" style="font-size:20px">GPU</text>
+  <text class="hand small" x="1169" y="754" style="font-size:13px">device passthrough</text>
+</svg>
