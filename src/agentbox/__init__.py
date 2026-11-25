@@ -60,7 +60,7 @@ bound_native_heap()
 
 def _get_version() -> str:
     try:
-        return version("agentbox")
+        return version("fair-agentbox")
     except PackageNotFoundError:
         return "0.0.0"
 
